@@ -1,0 +1,37 @@
+{% extends 'page.html' %}
+
+{% block content %}
+    <h1>Are you approve a new changes of Constitutions?</h1>
+    <form action='/first'>
+    <button id="fleeing-button" onmouseover="moveButton()">No</button>
+    </form>
+    <br>
+    <br>
+    <br>
+    <br>
+    <form action='/ok'>
+        <button id="yes-button">Yes</button>
+    </form>
+
+
+    <script>
+        function moveButton() {
+            var button = document.getElementById('fleeing-button');
+
+            var bodyWidth = document.documentElement.clientWidth;
+            var bodyHeight = document.documentElement.clientHeight;
+
+            var buttonWidth = button.offsetWidth;
+            var buttonHeight = button.offsetHeight;
+
+            var maxX = bodyWidth - buttonWidth;
+            var maxY = bodyHeight - buttonHeight;
+
+            var randomX = Math.random() * maxX;
+            var randomY = Math.random() * maxY;
+
+            button.style.left = randomX + 'px';
+            button.style.top = randomY + 'px';
+        }
+    </script>
+{% endblock %}

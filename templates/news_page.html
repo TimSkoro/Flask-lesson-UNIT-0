@@ -1,0 +1,62 @@
+{% extends 'page.html' %}
+
+{% block content %}
+    <h1>NEWS</h1>
+    <a href="/news?bad_news=1">Bad</a>
+    <a href="/news?bad_news=0">Good</a>
+    <a href="/news">All</a>
+    {% for news in data %}
+        <div class="news-container">
+            <div class="news-content">
+                <strong>{{ news.title }}</strong>
+                <br>
+                <small>{{ news.description }}</small>
+                <br>
+                {% if news.bad_news == 1 %}
+                    <small class="news-label bad-news">BAD</small>
+                {% else %}
+                    <small class="news-label good-news">GOOD</small>
+                {% endif %}
+            </div>
+        </div>
+        <form action="/news/{{ news.id }}" method="post" class="delete-form">
+            <input type="submit" value="Delete" class="delete-button">
+        </form>
+    {% endfor %}
+
+    <div class="container">
+        <h2>Add news</h2>
+        <form action="/news" method="post">
+            <div class="row">
+                <div class="col-25">
+                    <label for="title">Title:</label>
+                </div>
+                <div class="col-75">
+                    <input type="text" id="tilte" name="title" placeholder="Title of news...">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-25">
+                    <label for="description">Subject</label>
+                </div>
+                <div class="col-75">
+                    <textarea id="description" name="description" placeholder="Description.."
+                              style="height:200px"></textarea>
+                </div>
+            </div>
+            <div class="col-25">
+                <label for="bad_news">This news is bad: </label>
+            </div>
+            <div class="col-75">
+                <select id="bad_news" name="bad_news">
+                    <option value=1>YES</option>
+                    <option value=0>NO</option>
+                </select>
+            </div>
+            <br>
+            <div class="row">
+                <input type="submit" value="Submit">
+            </div>
+        </form>
+    </div>
+{% endblock %}
